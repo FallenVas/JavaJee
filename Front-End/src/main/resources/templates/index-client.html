@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{style.css}"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-light static-top justify-content-between" style="width:100vw; padding:10px 20px; background-color: #0F1011 !important;">
+        <div>
+            <a class="navbar-brand" href="/">Managing Clients Mini App</a>
+            <button class="navbar-toggler" type="button"
+                    data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarResponsive" style="flex-grow:0">
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Clients
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/countries}">Countries
+                    </a>
+                </li>
+                <li sec:authorize="isAuthenticated()" class="nav-item">
+                    <a class="btn btn-outline-secondary"
+                       th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </div>
+</nav>
+<div class="row" style="padding: 2rem 10rem">
+    <div class="col-4">
+        <h2 class="text-xl-center text-white">New Client</h2>
+        <form action="#" th:action="@{/add-client}"
+              th:object="${client}" method="post">
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" th:field="*{name}" id="name"
+                       placeholder="Name" class="form-control">
+            </div>
+            <div class="form-group mb-2">
+                <label for="age">Age</label>
+                <input type="number" th:field="*{age}" id="age" name="age"
+                       placeholder="age" class="form-control">
+            </div>
+            <div class="form-group mb-2">
+                <label for="age">Image Url</label>
+                <input type="checkbox" id="imageChecker">
+                <input type="text" th:field="*{imageUrl}" id="image" name="imageUrl"
+                       placeholder="Image Url" class="form-control" style="opacity:0">
+            </div>
+            <div class="form-group mb-2">
+                <label for="countryId">Country</label>
+                <select class="form-select" aria-label="Please select a country" id="countryId"  name="countryId">
+                    <div th:each="country : ${countries}">
+                        <option th:value="${country.id}" th:text="${country.name}"></option>
+                    </div>
+
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success">Add
+                Client</button>
+        </form>
+        <br><br>
+        <div class="alert alert-danger" id="msgDenied" role="alert" th:text="${msgDenied}" th:if="${msgDenied}"></div>
+        <div class="alert alert-success" id="msgSuccess" role="alert" th:text="${msgSuccess}" th:if="${msgSuccess}"></div>
+
+    </div>
+    <div class="col-8 d-flex justify-content-center">
+                <table class="table table-dark">
+                    <thead>
+                    <tr class="table-active center">
+                        <th scope="col">Photo</th>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">age</th>
+                        <th scope="col">country</th>
+
+                        <th scope="col" sec:authorize="hasRole('ADMIN')">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="client : ${clients}">
+                        <td>
+                            <div class="event-img">
+                                <img th:if="${client.imageUrl == null}" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt=""/>
+                                <img th:unless="${client.imageUrl == null}" th:src="${client.imageUrl}" alt=""/>
+
+                            </div>
+                        </td>
+                        <td th:text="${client.id}"></td>
+                        <td th:text="${client.name}"></td>
+                        <td th:text="${client.age}"></td>
+                        <td th:if="${client.country.name !=null}" th:text="${client.country.name}"></td>
+
+
+                        <td sec:authorize="hasRole('ADMIN')">
+                            <a class="btn btn-primary"
+                               th:href="@{|/show-client/${client.id}|}">
+                                <i class="fa fa-edit fa-lg"></i> Edit</a>
+                            <a class="btn btn-danger"
+
+                               th:href="@{|/delete-client/${client.id}|}">
+                                <i class="fa fa-trash fa-lg"></i> Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script><script
+        th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+<script>
+    document.querySelector('#imageChecker').addEventListener('click' , e => {
+        if(e.target.checked){
+            document.querySelector('#image').style.opacity = '1'
+        }
+        else{
+            document.querySelector('#image').style.opacity = '0'
+        }
+    })
+    setTimeout(function() {
+    $('#msgSuccess').fadeOut('fast');
+    $('#msgDenied').fadeOut('fast');
+
+}, 3000);
+</script>
+</body>
