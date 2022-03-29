@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name="countries")
 public class Countries {
     @Id
-    @GeneratedValue()
+    @GeneratedValue
     @Column(name = "country_id")
     private Long id;
     private String name;

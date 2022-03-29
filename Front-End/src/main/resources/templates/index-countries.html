@@ -66,7 +66,7 @@
                 <tr class="table-active center">
                     <th scope="col">Id</th>
                     <th scope="col">Country</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col" sec:authorize="hasRole('ADMIN')">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -74,7 +74,7 @@
     
                     <td th:text="${country.id}"></td>
                     <td th:text="${country.name}"></td>
-                    <td>
+                    <td sec:authorize="hasRole('ADMIN')">
                         <a class="btn btn-primary"
                            th:href="@{|/show-country/${country.id}|}">
                             <i class="fa fa-edit fa-lg"></i> Edit</a>

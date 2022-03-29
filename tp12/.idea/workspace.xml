@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f39cb89-2552-4fea-a357-147995e36344" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Front-End/src/main/resources/templates/edit-Country.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/src/main/java/ma/cigma/config/security/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/src/main/java/ma/cigma/config/security/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/src/main/java/ma/cigma/controllers/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/src/main/java/ma/cigma/controllers/ClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/src/main/java/ma/cigma/controllers/CountriesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/src/main/java/ma/cigma/controllers/CountriesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/src/main/resources/templates/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/src/main/resources/templates/edit-Client.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/src/main/resources/templates/index-client.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/src/main/resources/templates/index-client.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-End/src/main/resources/templates/edit-Client.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/src/main/resources/templates/edit-Client.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-End/src/main/resources/templates/edit-Country.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/src/main/resources/templates/edit-Country.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Front-End/src/main/resources/templates/index-countries.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/src/main/resources/templates/index-countries.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
