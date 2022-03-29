@@ -53,15 +53,21 @@ public class ClientController {
     }
     @GetMapping("/show-client/{id}")
     public String show( Model model, @PathVariable long id) {
+        List<Countries> countries = restTemplate.getForObject(apiUrl+"/countries/all" ,List.class );
+        model.addAttribute("countries" , countries);
         Client client = restTemplate.getForObject(apiUrl+"/client/show-client/"+id, Client.class);
-       model.addAttribute("client",client);
-        System.out.println(client);
-        return "edit";
+        model.addAttribute("client",client);
+        return "edit-Client";
     }
 
-    @PostMapping(value = {"/save-client"})
-    public String save(Model model, @ModelAttribute("client") Client client) {
-        restTemplate.put(apiUrl+"/client/"+client.getId(), client, Client.class);
+    @PostMapping(value = {"/update-client"})
+    public String save(Model model, @ModelAttribute("client") ClientRequest client , RedirectAttributes redAttrs) {
+        if(client.getImageUrl() == ""){
+            client.setImageUrl(null);
+        }
+        restTemplate.put(apiUrl+"/client/"+client.getId(), client, ClientRequest.class);
+        redAttrs.addFlashAttribute("msgSuccess", "User Updated Successfully");
+
         return "redirect:/client";
     }
 

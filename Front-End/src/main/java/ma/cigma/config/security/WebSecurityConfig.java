@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/" , "/countries" , "/add-client", "/addCountry").hasAnyRole("USER","ADMIN")
-                .antMatchers("/delete-client/{id}" , "/show-client/{id}" , "/save-client" , "/deleteCountry/{id}").hasRole("ADMIN")
+                .antMatchers("/delete-client/{id}" , "/show-client/{id}" , "/save-client" , "/deleteCountry/{id}" ,"/show-country/{id}" , "/update-country" , "/update-client").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()

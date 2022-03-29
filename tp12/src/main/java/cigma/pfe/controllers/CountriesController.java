@@ -47,7 +47,9 @@ public class CountriesController {
         return service.Find(name);
     }
     @PutMapping("/{id}")
-    public Countries update(@RequestBody Countries country) {
-        return service.save(country);
+    public Countries update(@PathVariable("id") long id ,  @RequestBody Countries country) {
+        Countries ctr = service.getOne(id);
+        ctr.setName(country.getName());
+        return service.save(ctr);
     }
 }

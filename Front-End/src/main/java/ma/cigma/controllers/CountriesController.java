@@ -50,4 +50,18 @@ public class CountriesController {
 
         return "redirect:/countries";
     }
+    @GetMapping("/show-country/{id}")
+    public String show( Model model, @PathVariable long id) {
+        Countries country = restTemplate.getForObject(apiUrl+"/countries/showCountry/"+id, Countries.class);
+        model.addAttribute("country",country);
+        return "edit-Country";
+    }
+    @PostMapping(value = {"/update-country"})
+    public String save(Model model, @ModelAttribute("country") Countries country , RedirectAttributes redAttrs) {
+
+        restTemplate.put(apiUrl+"/countries/"+country.getId(), country, Countries.class);
+        redAttrs.addFlashAttribute("msgSuccess", "Country Updated Successfully");
+
+        return "redirect:/client";
+    }
 }

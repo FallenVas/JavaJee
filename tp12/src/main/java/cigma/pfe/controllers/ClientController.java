@@ -53,7 +53,13 @@ public class ClientController {
         return service.Find(name);
     }
     @PutMapping("/{id}")
-    public Client update(@RequestBody Client client) {
+    public Client update(@PathVariable("id") Long id , @RequestBody ClientRequest clt) {
+        Client client = service.getOne(id);
+        Countries country = countryRepository.findById(clt.getCountryId());
+        client.setCountry(country);
+        client.setAge(clt.getAge());
+        client.setImageUrl(clt.getImageUrl());
+        client.setName(clt.getName());
         return service.save(client);
     }
 }

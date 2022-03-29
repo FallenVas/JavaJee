@@ -57,7 +57,7 @@
                 </div>
     
                 <button type="submit" class="btn btn-success">Add
-                    Client</button>
+                    Country</button>
             </form>
         </div>
         <div class="d-flex col-8 justify-content-center">
@@ -76,7 +76,7 @@
                     <td th:text="${country.name}"></td>
                     <td>
                         <a class="btn btn-primary"
-                           th:href="@{|/show-client/${country.id}|}">
+                           th:href="@{|/show-country/${country.id}|}">
                             <i class="fa fa-edit fa-lg"></i> Edit</a>
                         <a class="btn btn-danger"
                            th:href="@{|/deleteCountry/${country.id}|}">
